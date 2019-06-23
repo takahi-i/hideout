@@ -6,8 +6,8 @@ from hideout import env
 
 class Keeper:
     def __init__(self, base_dir, force, skip_list=[]):
-        self.base_dir = base_dir or env.HIDEOUT_BASEDIR
-        self.force = force or env.HIDEOUT_FORCE_CACHE
+        self.base_dir = base_dir
+        self.force = force
         self.skip_list = skip_list
 
     def freeze(self, target, file_name, force=True):
