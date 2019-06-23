@@ -1,8 +1,6 @@
 import os
 import pickle
 
-from hideout import env
-
 
 class Keeper:
     def __init__(self, base_dir, force, skip_list=[]):
