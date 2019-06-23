@@ -10,8 +10,8 @@ class Keeper:
         self.skip_list = skip_list
         self.force = force or env.HIDEOUT_FORCE_CACHE
 
-    def freeze(self, target, file_name, force=False):
-        if os.path.exists(file_name) and not force:
+    def freeze(self, target, file_name, force=True):
+        if (not os.path.exists(file_name)) or (not force):
             with open("{}/{}".format(env.HIDEOUT_BASEDIR, file_name), mode='wb') as f:
                 return pickle.dump(target, f)
 
