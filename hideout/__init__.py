@@ -15,7 +15,6 @@ def resume(file_name):
         yield None
 
 
-@contextlib.contextmanager
 def freeze(target, file_name):
     file_path="{}/{}".format(env.HIDEOUT_BASEDIR, file_name)
     if (not os.path.exists(file_path)) or env.HIDEOUT_FORCE_CACHE:
