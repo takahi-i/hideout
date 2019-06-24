@@ -15,7 +15,7 @@ def resume(file_name):
         with open(file_path, mode='rb') as f:
             target = pickle.load(f)
     yield target
-    if target is None:
+    if target is not None:
         freeze(target, file_name)
 
 
