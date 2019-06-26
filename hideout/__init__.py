@@ -2,7 +2,7 @@
 import os
 import pickle
 import contextlib
-from hideout import env, log
+from hideout import env
 from hideout.keeper import Keeper
 from hideout.log import logger
 

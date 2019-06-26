@@ -1,11 +1,11 @@
 import os
 import pickle
 
-from hideout import logger, env
+from hideout import env
+from hideout.log import logger
 
 
 class Keeper:
-
     def __init__(self, file_path):
         self.object = None
         if os.path.exists(file_path) and not env.HIDEOUT_FORCE_CACHE:
