@@ -8,7 +8,7 @@ from hideout.log import logger
 class Keeper:
     def __init__(self, file_path):
         self.loaded_object = None
-        if os.path.exists(file_path) and not env.HIDEOUT_FORCE_CACHE:
+        if os.path.exists(file_path) and not env.HIDEOUT_WITHOUT_CACHE:
             logger.error("found {}".format(file_path))
             with open(file_path, mode='rb') as f:
                 self.loaded_object = pickle.load(f)

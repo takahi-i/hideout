@@ -12,15 +12,15 @@ from hideout.log import logger
 def resume(file_prefix):
     file_path = "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
     target = Keeper(file_path)
-    yield target # run in with clause
+    yield target  # run in with clause
     if target.loaded_object is not None:
         _freeze(target.loaded_object, file_path)
     else:
-        raise RuntimeError("Any object is loaded....")
+        raise RuntimeError("Any object is loaded...")
 
 
 def _freeze(target_object, file_path):
-    if (not os.path.exists(file_path)) or env.HIDEOUT_FORCE_CACHE:
+    if not os.path.exists(file_path) or env.HIDEOUT_WITHOUT_CACHE:
         logger.info("saving {}".format(file_path))
         with open(file_path, mode='wb') as f:
             return pickle.dump(target_object, f)
