@@ -14,9 +14,10 @@ def resume(file_prefix):
     target = Keeper(file_path)
     yield target  # run in with clause
     if target.loaded_object is not None:
+        logger.info("found pickled object ...")
         _freeze(target.loaded_object, file_path)
     else:
-        raise RuntimeError("Any object is loaded...")
+        raise RuntimeError("Any object is loaded ...")
 
 
 def _freeze(target_object, file_path):
@@ -28,5 +29,6 @@ def _freeze(target_object, file_path):
 
 def remove_all(base_dir=env.HIDEOUT_BASEDIR):
     files = glob.glob("{}/*.pickle".format(base_dir))
+    logger.info("removing all pickles in {}".format(base_dir))
     for f in files:
         os.remove(f)
