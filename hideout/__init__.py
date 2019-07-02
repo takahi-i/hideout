@@ -9,25 +9,24 @@ from hideout.log import logger
 
 
 @contextlib.contextmanager
-def resume(file_name):
-    file_path = "{}/{}".format(env.HIDEOUT_BASEDIR, file_name)
+def resume(file_prefix):
+    file_path = "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
     target = Keeper(file_path)
-    yield target
-    if target.object is not None:
-        _freeze(target.object, file_name)
+    yield target # run in with clause
+    if target.loaded_object is not None:
+        _freeze(target.loaded_object, file_path)
     else:
-        raise RuntimeError("Any object is not specified")
+        raise RuntimeError("Any object is loaded....")
 
 
-def _freeze(target_object, file_name):
-    file_path = "{}/{}".format(env.HIDEOUT_BASEDIR, file_name)
+def _freeze(target_object, file_path):
     if (not os.path.exists(file_path)) or env.HIDEOUT_FORCE_CACHE:
         logger.info("saving {}".format(file_path))
         with open(file_path, mode='wb') as f:
             return pickle.dump(target_object, f)
 
 
-def remove_all():
-    files = glob.glob("{}/*.pickle".format(env.HIDEOUT_BASEDIR))
+def remove_all(base_dir=env.HIDEOUT_BASEDIR):
+    files = glob.glob("{}/*.pickle".format(base_dir))
     for f in files:
         os.remove(f)
