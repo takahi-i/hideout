@@ -13,6 +13,16 @@ def resume(file_prefix):
     file_path = "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
     target = Keeper(file_path)
     yield target  # run in with clause
+    _postprocess(file_path, target)
+
+
+@contextlib.contextmanager
+def _resume_from_keeper(keeper, file_path):
+    yield keeper  # run in with clause
+    _postprocess(file_path, keeper)
+
+
+def _postprocess(file_path, target):
     if target.loaded_object is not None:
         logger.info("found pickled object ...")
         _freeze(target.loaded_object, file_path)
