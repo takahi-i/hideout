@@ -11,20 +11,15 @@ from hideout.log import logger
 @contextlib.contextmanager
 def resume(file_prefix):
     file_path = "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
-    target = Keeper(file_path)
-    yield target  # run in with clause
-    if target.loaded_object is not None:
-        logger.info("found pickled object ...")
-        _freeze(target.loaded_object, file_path)
-    else:
-        raise RuntimeError("Any object is loaded ...")
+    keeper = Keeper(file_path)
+    yield keeper  # run in with clause
+    keeper.postprocess(file_path)
 
 
-def _freeze(target_object, file_path):
-    if not os.path.exists(file_path) or env.HIDEOUT_WITHOUT_CACHE:
-        logger.info("saving {}".format(file_path))
-        with open(file_path, mode='wb') as f:
-            return pickle.dump(target_object, f)
+@contextlib.contextmanager
+def _resume_from_keeper(keeper, file_path):
+    yield keeper  # run in with clause
+    keeper.postprocess(file_path)
 
 
 def remove_all(base_dir=env.HIDEOUT_BASEDIR):

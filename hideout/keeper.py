@@ -23,3 +23,16 @@ class Keeper:
         if self.loaded_object is not None:
             return True
         return False
+
+    def postprocess(self, file_path):
+        if self.loaded_object is not None:
+            logger.info("found pickled object ...")
+            self._freeze(self.loaded_object, file_path)
+        else:
+            raise RuntimeError("Any object is loaded ...")
+
+    def _freeze(self, target_object, file_path):
+        if not os.path.exists(file_path) or env.HIDEOUT_WITHOUT_CACHE:
+            logger.info("saving {}".format(file_path))
+            with open(file_path, mode='wb') as f:
+                return pickle.dump(target_object, f)
