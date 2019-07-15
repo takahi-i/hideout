@@ -4,7 +4,7 @@ import unittest
 
 import hideout
 
-from hideout import Keeper, env
+from hideout import env
 
 
 def freeze(file_path, target_object):

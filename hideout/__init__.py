@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import pickle
 import contextlib
 import glob
 from hideout import env
