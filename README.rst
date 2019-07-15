@@ -1,3 +1,8 @@
+.. image:: https://travis-ci.org/takahi-i/hideout.svg?branch=master
+    :alt: Build status
+    :target: https://travis-ci.org/takahi-i/hideout
+
+
 =====================================================
 hideout 
 =====================================================
