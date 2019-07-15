@@ -12,7 +12,9 @@ Install
 --------
 
 
-`pip install hideout`
+::
+
+    pip install hideout
 
 
 Usage
@@ -34,9 +36,13 @@ For Developers
 Install to local environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$ python setup.py install
+::
+
+   $ python setup.py install
 
 Upload to pypi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$ python setup.py sdist upload
+::
+
+    $ python setup.py sdist upload
