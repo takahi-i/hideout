@@ -7,10 +7,14 @@
 hideout 
 =====================================================
 
+Data processing programs such as machine learning takes sorts of input data. After input data are loaded, program creates intermediate objects using input data.
+Getting or converting data takes large amount of the time. This problem prevents programmers to refactor data processing programs.
+
 
 Install
 --------
 
+We can install hideout with pip. Run the following command.
 
 ::
 
