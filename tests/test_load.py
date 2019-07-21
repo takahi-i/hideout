@@ -1,9 +1,7 @@
-import pickle
 import tempfile
 import unittest
 
 import hideout
-
 from hideout import env
 from hideout.keeper import _generate_file_path
 from hideout.utils import freeze
