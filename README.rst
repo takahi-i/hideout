@@ -18,7 +18,7 @@ We can install hideout with pip. Run the following command.
 
 ::
 
-    pip install hideout
+    $ pip install hideout
 
 
 Usage

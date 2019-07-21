@@ -1,15 +1,10 @@
-import pickle
 import tempfile
 import unittest
 
 import hideout
-
 from hideout import env
-
-
-def freeze(file_path, target_object):
-    with open(file_path, mode='wb') as f:
-        return pickle.dump(target_object, f)
+from hideout.keeper import _generate_file_path
+from hideout.utils import freeze
 
 
 class TestLoadCache(unittest.TestCase):
@@ -25,7 +20,8 @@ class TestLoadCache(unittest.TestCase):
 
     def test_resume_with_cache(self):
         org_object = {"foobar": "baz"}
-        freeze(env.HIDEOUT_BASEDIR + "/want-to-load-object.pickle", org_object)
+        file_path = _generate_file_path("want-to-load-object")
+        freeze(org_object, file_path)
         with hideout.resume(file_prefix="want-to-load-object") as want_to_load_object:
             if not want_to_load_object.succeeded_to_load():
                 want_to_load_object.set({"foobar": "bar"})
