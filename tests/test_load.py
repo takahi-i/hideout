@@ -5,6 +5,7 @@ import unittest
 import hideout
 
 from hideout import env
+from hideout.keeper import _generate_file_path
 from hideout.utils import freeze
 
 
@@ -21,7 +22,7 @@ class TestLoadCache(unittest.TestCase):
 
     def test_resume_with_cache(self):
         org_object = {"foobar": "baz"}
-        file_path = "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, "want-to-load-object")
+        file_path = _generate_file_path("want-to-load-object")
         freeze(org_object, file_path)
         with hideout.resume(file_prefix="want-to-load-object") as want_to_load_object:
             if not want_to_load_object.succeeded_to_load():

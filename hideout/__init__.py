@@ -9,16 +9,15 @@ from hideout.log import logger
 
 @contextlib.contextmanager
 def resume(file_prefix):
-    file_path = "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
-    keeper = Keeper(file_path)
+    keeper = Keeper(file_prefix)
     yield keeper  # run in with clause
-    keeper.postprocess(file_path)
+    keeper.postprocess()
 
 
 @contextlib.contextmanager
-def _resume_from_keeper(keeper, file_path):
+def _resume_from_keeper(keeper):
     yield keeper  # run in with clause
-    keeper.postprocess(file_path)
+    keeper.postprocess()
 
 
 def remove_all(base_dir=env.HIDEOUT_BASEDIR):
