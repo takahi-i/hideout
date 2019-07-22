@@ -2,6 +2,7 @@ import tempfile
 import unittest
 
 import hideout
+import hideout.area
 from hideout import env
 from hideout import _generate_file_path
 from hideout.utils import freeze
@@ -32,12 +33,12 @@ class TestLoadCache(unittest.TestCase):
 
     def test_resume_without_cache(self):
         want_to_load_object = \
-            hideout.Keeper("want-to-load-object").resume(generate)
+            hideout.area.Keeper("want-to-load-object").resume(generate)
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
 
     def test_resume_without_cache_with_param(self):
         want_to_load_object = \
-            hideout.Keeper("want-to-load-object").resume(generate2, baz="uho")
+            hideout.area.Keeper("want-to-load-object").resume(generate2, baz="uho")
         self.assertEqual({"foobar": "uho"}, want_to_load_object)
 
     def test_resume_with_cache(self):
@@ -45,18 +46,18 @@ class TestLoadCache(unittest.TestCase):
         file_path = _generate_file_path("want-to-load-object")
         freeze(org_object, file_path)
         want_to_load_object = \
-            hideout.Keeper("want-to-load-object").resume(generate)
+            hideout.area.Keeper("want-to-load-object").resume(generate)
         self.assertEqual(org_object, want_to_load_object)
 
     def test_resume_without_cache_from_instance(self):
         generator = Generator()
         want_to_load_object = \
-            hideout.Keeper("want-to-load-object").resume(generator.generate)
+            hideout.area.Keeper("want-to-load-object").resume(generator.generate)
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
 
     def test_resume_without_cache_from_instance_with_param(self):
         generator = Generator2()
         want_to_load_object = \
-            hideout.Keeper("want-to-load-object").resume(
+            hideout.area.Keeper("want-to-load-object").resume(
                 generator.generate, baz="uho")
         self.assertEqual({"foobar": "uho"}, want_to_load_object)
