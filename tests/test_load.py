@@ -20,6 +20,11 @@ class Generator:
         return {"foobar": "bar"}
 
 
+class Generator2:
+    def generate(self, baz):
+        return {"foobar": baz}
+
+
 class TestLoadCache(unittest.TestCase):
 
     def setUp(self):
@@ -42,5 +47,10 @@ class TestLoadCache(unittest.TestCase):
 
     def test_resume_without_cache_from_instance(self):
         generator = Generator()
-        want_to_load_object = hideout.Keeper("want-to-load-object-3").resume(generator.generate)
+        want_to_load_object = hideout.Keeper("want-to-load-object").resume(generator.generate)
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
+
+    def test_resume_without_cache_from_instance_with_param(self):
+        generator = Generator2()
+        want_to_load_object = hideout.Keeper("want-to-load-object").resume(generator.generate, baz="uho")
+        self.assertEqual({"foobar": "uho"}, want_to_load_object)
