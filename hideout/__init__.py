@@ -3,12 +3,12 @@ import os
 import glob
 
 from hideout import env
+from hideout.area import Keeper
 from hideout.log import logger
-from hideout.utils import freeze
 
 
-def _generate_file_path(file_prefix):
-    return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
+def resume(label, func, **kwargs):
+    return Keeper(label).resume(func, **kwargs)
 
 
 def remove_all(base_dir=env.HIDEOUT_BASEDIR):

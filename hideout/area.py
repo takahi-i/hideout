@@ -1,7 +1,13 @@
 import os
 import pickle
 
-from hideout import _generate_file_path, env, logger, freeze
+from hideout import env
+from hideout.utils import freeze
+from hideout.log import logger
+
+
+def _generate_file_path(file_prefix):
+    return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
 
 
 class Keeper:
