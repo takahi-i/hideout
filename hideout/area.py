@@ -2,8 +2,8 @@ import os
 import pickle
 
 from hideout import env
-from hideout.log import logger
 from hideout.utils import freeze
+from hideout.log import logger
 
 
 def _generate_file_path(file_prefix):
@@ -18,6 +18,15 @@ class Keeper:
             logger.error("found {}".format(self.file_path))
             with open(self.file_path, mode='rb') as f:
                 self.loaded_object = pickle.load(f)
+
+    def resume(self, func, **kwargs):
+        if not self.succeeded_to_load():
+            if len(kwargs) == 0:
+                self.loaded_object = func()
+            else:
+                self.loaded_object = func(**kwargs)
+            self.postprocess()
+        return self.loaded_object
 
     def set(self, target_object):
         self.loaded_object = target_object

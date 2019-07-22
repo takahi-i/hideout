@@ -1,23 +1,14 @@
 # -*- coding: utf-8 -*-
 import os
-import contextlib
 import glob
+
 from hideout import env
-from hideout.keeper import Keeper
+from hideout.area import Keeper
 from hideout.log import logger
 
 
-@contextlib.contextmanager
-def resume(file_prefix):
-    keeper = Keeper(file_prefix)
-    yield keeper  # run in with clause
-    keeper.postprocess()
-
-
-@contextlib.contextmanager
-def _resume_from_keeper(keeper):
-    yield keeper  # run in with clause
-    keeper.postprocess()
+def resume(label, func, **kwargs):
+    return Keeper(label).resume(func, **kwargs)
 
 
 def remove_all(base_dir=env.HIDEOUT_BASEDIR):

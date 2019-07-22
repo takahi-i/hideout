@@ -2,9 +2,28 @@ import tempfile
 import unittest
 
 import hideout
+import hideout.area
 from hideout import env
-from hideout.keeper import _generate_file_path
+from hideout.area import _generate_file_path
 from hideout.utils import freeze
+
+
+def generate():
+    return {"foobar": "bar"}
+
+
+def generate2(baz):
+    return {"foobar": baz}
+
+
+class Generator:
+    def generate(self):
+        return {"foobar": "bar"}
+
+
+class Generator2:
+    def generate(self, baz):
+        return {"foobar": baz}
 
 
 class TestLoadCache(unittest.TestCase):
@@ -13,21 +32,31 @@ class TestLoadCache(unittest.TestCase):
         env.HIDEOUT_BASEDIR = tempfile.mkdtemp()
 
     def test_resume_without_cache(self):
-        with hideout.resume("want-to-load-object") as want_to_load_object:
-            if not want_to_load_object.succeeded_to_load():
-                want_to_load_object.set({"foobar": "baz"})
-            self.assertEqual({"foobar": "baz"}, want_to_load_object.get())
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object", func=generate)
+        self.assertEqual({"foobar": "bar"}, want_to_load_object)
+
+    def test_resume_without_cache_with_param(self):
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object", func=generate2, baz="uho")
+        self.assertEqual({"foobar": "uho"}, want_to_load_object)
 
     def test_resume_with_cache(self):
         org_object = {"foobar": "baz"}
         file_path = _generate_file_path("want-to-load-object")
         freeze(org_object, file_path)
-        with hideout.resume("want-to-load-object") as want_to_load_object:
-            if not want_to_load_object.succeeded_to_load():
-                want_to_load_object.set({"foobar": "bar"})
-            self.assertEqual(org_object, want_to_load_object.get())
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object", func=generate)
+        self.assertEqual(org_object, want_to_load_object)
 
-    def test_resume_without_cache_without_set(self):
-        with self.assertRaises(RuntimeError):
-            with hideout.resume("no-such-object") as want_to_load_object:
-                self.assertEqual(want_to_load_object.get(), None)
+    def test_resume_without_cache_from_instance(self):
+        generator = Generator()
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object", func=generator.generate)
+        self.assertEqual({"foobar": "bar"}, want_to_load_object)
+
+    def test_resume_without_cache_from_instance_with_param(self):
+        generator = Generator2()
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object", func=generator.generate, baz="uho")
+        self.assertEqual({"foobar": "uho"}, want_to_load_object)
