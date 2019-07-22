@@ -2,6 +2,8 @@
 import os
 import glob
 import pickle
+import sys
+
 from hideout import env
 from hideout.log import logger
 from hideout.utils import freeze
@@ -20,9 +22,12 @@ class Keeper:
             with open(self.file_path, mode='rb') as f:
                 self.loaded_object = pickle.load(f)
 
-    def resume(self, method):
+    def resume(self, method, **kwargs):
         if not self.succeeded_to_load():
-            self.loaded_object = method()
+            if len(kwargs) == 0:
+                self.loaded_object = method()
+            else:
+                self.loaded_object = method(**kwargs)
             self.postprocess()
         return self.loaded_object
 
