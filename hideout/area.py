@@ -19,12 +19,12 @@ class Keeper:
             with open(self.file_path, mode='rb') as f:
                 self.loaded_object = pickle.load(f)
 
-    def resume(self, func, **kwargs):
+    def resume(self, func, func_args):
         if not self.succeeded_to_load():
-            if len(kwargs) == 0:
+            if len(func_args) == 0:
                 self.loaded_object = func()
             else:
-                self.loaded_object = func(**kwargs)
+                self.loaded_object = func(**func_args)
             self.postprocess()
         return self.loaded_object
 
