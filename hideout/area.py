@@ -14,7 +14,7 @@ class Keeper:
     def __init__(self, file_prefix):
         self.file_path = _generate_file_path(file_prefix)
         self.loaded_object = None
-        if os.path.exists(self.file_path) and not env.HIDEOUT_WITHOUT_CACHE:
+        if os.path.exists(self.file_path) and not env.HIDEOUT_SUPPRESS_CACHE:
             logger.error("found {}".format(self.file_path))
             with open(self.file_path, mode='rb') as f:
                 self.loaded_object = pickle.load(f)
