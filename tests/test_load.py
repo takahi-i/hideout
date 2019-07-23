@@ -38,7 +38,9 @@ class TestLoadCache(unittest.TestCase):
 
     def test_resume_without_cache_with_param(self):
         want_to_load_object = hideout.resume(
-            label="want-to-load-object", func=generate2, func_args={"baz": "uho"})
+            label="want-to-load-object",
+            func=generate2,
+            func_args={"baz": "uho"})
         self.assertEqual({"foobar": "uho"}, want_to_load_object)
 
     def test_resume_with_cache(self):
@@ -46,17 +48,21 @@ class TestLoadCache(unittest.TestCase):
         file_path = _generate_file_path("want-to-load-object")
         freeze(org_object, file_path)
         want_to_load_object = hideout.resume(
-            label="want-to-load-object", func=generate)
+            label="want-to-load-object",
+            func=generate)
         self.assertEqual(org_object, want_to_load_object)
 
     def test_resume_without_cache_from_instance(self):
         generator = Generator()
         want_to_load_object = hideout.resume(
-            label="want-to-load-object", func=generator.generate)
+            label="want-to-load-object",
+            func=generator.generate)
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
 
     def test_resume_without_cache_from_instance_with_param(self):
         generator = Generator2()
         want_to_load_object = hideout.resume(
-            label="want-to-load-object", func=generator.generate, func_args={"baz": "uho"})
+            label="want-to-load-object",
+            func=generator.generate,
+            func_args={"baz": "uho"})
         self.assertEqual({"foobar": "uho"}, want_to_load_object)
