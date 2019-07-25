@@ -27,7 +27,9 @@ Usage
 ::
 
         large_object = hideout.resume(
-            label="large_object", func=generate_large_object, func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"})
+            label="large_object",
+            func=generate_large_object,
+            func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"})
 
 
 For Developers
