@@ -11,10 +11,11 @@ def _generate_file_path(file_prefix):
 
 
 class Keeper:
-    def __init__(self, file_prefix):
+    def __init__(self, file_prefix, stage):
         self.file_path = _generate_file_path(file_prefix)
+        self.stage = stage
         self.loaded_object = None
-        if not env.HIDEOUT_ENABLE_CACHE:
+        if not env.HIDEOUT_ENABLE_CACHE or stage in env.HIDEOUT_SKIP_STAGES:
             logger.error("suppressed loading cache")
             return
         if os.path.exists(self.file_path):
@@ -45,6 +46,6 @@ class Keeper:
     def postprocess(self):
         if self.loaded_object is not None:
             logger.info("found pickled object ...")
-            freeze(self.loaded_object, self.file_path)
+            freeze(self.loaded_object, self.file_path, self.stage)
         else:
             raise RuntimeError("Any object is loaded ...")
