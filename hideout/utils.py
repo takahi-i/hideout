@@ -4,7 +4,7 @@ from hideout import env
 from hideout.log import logger
 
 
-def freeze(target_object, file_path, stage=None):
+def freeze(target_object: object, file_path: str, stage: str=None) -> None:
     if not env.HIDEOUT_ENABLE_CACHE or stage in env.HIDEOUT_SKIP_STAGES:
         logger.info("skip saving to cache file ...")
         return
