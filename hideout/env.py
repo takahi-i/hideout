@@ -12,8 +12,9 @@ HIDEOUT_BASEDIR = os.getenv('HIDEOUT_BASEDIR', './')
 HIDEOUT_SKIP_STAGES = os.getenv('HIDEOUT_SKIP_STAGES', '').split(",")
 
 #
-# When this value is set to False, hideout does not store / load cache files.
+# When this value is set to True, hideout does store / load cache files.
 #
 # NOTE: https://qiita.com/koemu/items/fd333fd8ed14f31fbca6
-HIDEOUT_SUPPRESS_CACHE = bool(distutils.util.strtobool(
-    os.getenv('HIDEOUT_SUPPRESS_CACHE', "False")))
+#
+HIDEOUT_ENABLE_CACHE = bool(distutils.util.strtobool(
+    os.getenv('HIDEOUT_ENABLE_CACHE', "False")))

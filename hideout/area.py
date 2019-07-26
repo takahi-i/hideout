@@ -14,7 +14,7 @@ class Keeper:
     def __init__(self, file_prefix):
         self.file_path = _generate_file_path(file_prefix)
         self.loaded_object = None
-        if env.HIDEOUT_SUPPRESS_CACHE:
+        if not env.HIDEOUT_ENABLE_CACHE:
             logger.error("suppressed loading cache")
             return
         if os.path.exists(self.file_path):
