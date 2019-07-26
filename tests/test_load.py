@@ -69,7 +69,7 @@ class TestLoadCache(unittest.TestCase):
         self.assertEqual({"foobar": "uho"}, want_to_load_object)
 
     def test_resume_with_disabling_cache(self):
-        env.HIDEOUT_ENABLE_CACHE = False ## disabling cache
+        env.HIDEOUT_ENABLE_CACHE = False  # disabling cache
         org_object = {"foobar": "baz"}
         file_path = _generate_file_path("want-to-load-object")
         freeze(org_object, file_path)
