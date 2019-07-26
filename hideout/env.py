@@ -9,7 +9,7 @@ HIDEOUT_BASEDIR = os.getenv('HIDEOUT_BASEDIR', './')
 #
 # List of stages to skip caching.
 #
-HIDEOUT_SKIP_STAGES = os.getenv('HIDEOUT_SKIP_STAGES', '').split(",")
+HIDEOUT_SKIP_STAGES = set(os.getenv('HIDEOUT_SKIP_STAGES', "").split(","))
 
 #
 # When this value is set to True, hideout does store / load cache files.
