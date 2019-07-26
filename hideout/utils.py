@@ -5,7 +5,7 @@ from hideout.log import logger
 
 
 def freeze(target_object, file_path):
-    if env.HIDEOUT_SUPPRESS_CACHE:
+    if not env.HIDEOUT_ENABLE_CACHE:
         logger.info("skip saving to cache file ...")
         return
     logger.info("saving {}".format(file_path))

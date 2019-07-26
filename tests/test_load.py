@@ -30,6 +30,7 @@ class TestLoadCache(unittest.TestCase):
 
     def setUp(self):
         env.HIDEOUT_BASEDIR = tempfile.mkdtemp()
+        env.HIDEOUT_ENABLE_CACHE = True
 
     def test_resume_without_cache(self):
         want_to_load_object = hideout.resume(
@@ -66,3 +67,13 @@ class TestLoadCache(unittest.TestCase):
             func=generator.generate,
             func_args={"baz": "uho"})
         self.assertEqual({"foobar": "uho"}, want_to_load_object)
+
+    def test_resume_with_disabling_cache(self):
+        env.HIDEOUT_ENABLE_CACHE = False  # disabling cache
+        org_object = {"foobar": "baz"}
+        file_path = _generate_file_path("want-to-load-object")
+        freeze(org_object, file_path)
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object",
+            func=generate)
+        self.assertEqual({"foobar": "bar"}, want_to_load_object)
