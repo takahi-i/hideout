@@ -67,3 +67,6 @@ target/
 
 # misc
 .pfm
+
+# mypy
+.mypy_cache/

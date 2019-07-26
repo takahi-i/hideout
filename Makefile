@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help
+.PHONY: clean clean-test clean-pyc clean-build docs help type-check
 .DEFAULT_GOAL := help
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -49,6 +49,9 @@ clean-test: ## remove test and coverage artifacts
 
 lint: ## check style with flake8
 	flake8 hideout tests
+
+type-check: ## check types with mypy
+	mypy -p hideout
 
 test: ## run tests quickly with the default Python
 	python setup.py test

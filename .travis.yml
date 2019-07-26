@@ -18,3 +18,4 @@ install:
 script:
   - make test
   - make lint
+  - make type-check

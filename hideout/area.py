@@ -1,5 +1,6 @@
 import os
 import pickle
+from typing import Callable, Dict
 
 from hideout import env
 from hideout.utils import freeze
@@ -11,7 +12,7 @@ def _generate_file_path(file_prefix):
 
 
 class Keeper:
-    def __init__(self, file_prefix, stage):
+    def __init__(self, file_prefix: str, stage: str=None):
         self.file_path = _generate_file_path(file_prefix)
         self.stage = stage
         self.loaded_object = None
@@ -23,7 +24,7 @@ class Keeper:
             with open(self.file_path, mode='rb') as f:
                 self.loaded_object = pickle.load(f)
 
-    def resume(self, func, func_args):
+    def resume(self, func: Callable, func_args: Dict) -> object:
         if not self.succeeded_to_load():
             if len(func_args) == 0:
                 self.loaded_object = func()
@@ -32,18 +33,18 @@ class Keeper:
             self.postprocess()
         return self.loaded_object
 
-    def set(self, target_object):
+    def set(self, target_object: object) -> None:
         self.loaded_object = target_object
 
-    def get(self):
+    def get(self) -> object:
         return self.loaded_object
 
-    def succeeded_to_load(self):
+    def succeeded_to_load(self) -> bool:
         if self.loaded_object is not None:
             return True
         return False
 
-    def postprocess(self):
+    def postprocess(self) -> None:
         if self.loaded_object is not None:
             logger.info("found pickled object ...")
             freeze(self.loaded_object, self.file_path, self.stage)
