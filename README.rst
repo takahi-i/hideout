@@ -24,12 +24,23 @@ We can install hideout with pip. Run the following command.
 Usage
 ------
 
+Basic Usage 
+~~~~~~~~~~~~
+
 ::
 
         large_object = hideout.resume(
             label="large_object",
             func=generate_large_object,
-            func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"})
+            func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"}
+        )
+        
+Enable / Disable Cache
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Directory to Store Cache Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 For Developers
