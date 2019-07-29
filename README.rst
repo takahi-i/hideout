@@ -40,7 +40,7 @@ loads it otherwise call specified function to generate expected object.
         )
 
 
-`hideout.resume` have `func_args` option which contains the parameters of specified function to generate the expected object)
+`hideout.resume` have `func_args` option which contains the parameters of specified function to generate the expected object.
 
 Enable / Disable Cache
 ~~~~~~~~~~~~~~~~~~~~~~~

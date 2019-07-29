@@ -37,6 +37,12 @@ class TestLoadCache(unittest.TestCase):
             label="want-to-load-object", func=generate)
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
 
+    def test_resume_and_save_to_not_exist_dir(self):
+        env.HIDEOUT_BASEDIR = tempfile.mkdtemp() + "/foobar"
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object", func=generate)
+        self.assertEqual({"foobar": "bar"}, want_to_load_object)
+
     def test_resume_without_cache_with_param(self):
         want_to_load_object = hideout.resume(
             label="want-to-load-object",
