@@ -56,7 +56,8 @@ In default, Hideout is not activated and therefore does not save and load cache 
 Directory to Store Cache Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+In default, Hideout saves the cache files in `caches` under the top project directory. If we specify the directory, we specify it with environment variable
+`HIDEOUT_BASE_DIR`.
 
 For Developers
 ---------------
