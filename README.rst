@@ -24,8 +24,12 @@ We can install hideout with pip. Run the following command.
 Usage
 ------
 
+
 Basic Usage 
 ~~~~~~~~~~~~
+
+Hideout save and load object with `hideout.resume`. If the cache file for the object exist, hideout
+loads it otherwise call specified function to generate expected object.
 
 ::
 
@@ -34,13 +38,24 @@ Basic Usage
             func=generate_large_object,
             func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"}
         )
-        
+
+
+`hideout.resume` have `func_args` option which contains the parameters of specified function to generate the expected object)
+
 Enable / Disable Cache
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+In default, Hideout is not activated and therefore does not save and load cache files. To enable cache we set the provided environment variable
+`HIDOUT_ENABLE_CACHE` to `True`.
+
+::
+
+    HIDEOUT_ENBALE_CACHE=True your_data_engineering_program.py
 
 
 Directory to Store Cache Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 For Developers
