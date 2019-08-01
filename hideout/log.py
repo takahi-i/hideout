@@ -1,10 +1,7 @@
-import sys
-import logging
-
-logger = logging.getLogger('')
-logger.setLevel(logging.INFO)
-
-sh = logging.StreamHandler(sys.stderr)
-sh.setLevel(logging.INFO)
-
-logger.addHandler(sh)
+from logging import getLogger, StreamHandler, INFO
+logger = getLogger(__name__)
+handler = StreamHandler()
+handler.setLevel(INFO)
+logger.setLevel(INFO)
+logger.addHandler(handler)
+logger.propagate = False
