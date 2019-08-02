@@ -27,7 +27,7 @@ test_requirements = [
 
 setup(
     name='hideout',
-    version='0.2.3',
+    version='0.2.4',
     description="",
     long_description=LONG_DESCRIPTION,
     author="Takahiko Ito",
