@@ -53,6 +53,11 @@ In default, Hideout is not activated and therefore does not save and load cache 
     $ HIDEOUT_ENBALE_CACHE=True your_data_engineering_program.py
 
 
+Disable Cache for Specified Stages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TBD
+
 Directory to Store Cache Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
