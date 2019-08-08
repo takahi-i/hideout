@@ -83,3 +83,27 @@ class TestLoadCache(unittest.TestCase):
             label="want-to-load-object",
             func=generate)
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
+
+    def test_not_resume_disabling_stage(self):
+        env.HIDEOUT_SKIP_STAGES = ["preliminary"]
+        org_object = {"foobar": "baz"}
+        file_path = _generate_file_path("want-to-load-object")
+        freeze(org_object, file_path)
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object",
+            func=generate,
+            stage="preliminary"
+        )
+        self.assertEqual({"foobar": "bar"}, want_to_load_object)
+
+    def test_resume_not_disabling_stage(self):
+        env.HIDEOUT_SKIP_STAGES = ["preliminary"]
+        org_object = {"foobar": "baz"}
+        file_path = _generate_file_path("want-to-load-object")
+        freeze(org_object, file_path)
+        want_to_load_object = hideout.resume(
+            label="want-to-load-object",
+            func=generate,
+            stage="body"
+        )
+        self.assertEqual({"foobar": "baz"}, want_to_load_object)
