@@ -56,7 +56,10 @@ In default, Hideout is not activated and therefore does not save and load cache 
 Disable Cache for Specified Stages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TBD
+
+::
+
+    $ HIDEOUT_SKIP_STAGES=preliminaries,integrate your_data_engineering_program.py
 
 Directory to Store Cache Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
