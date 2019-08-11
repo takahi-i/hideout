@@ -11,6 +11,10 @@ def _generate_file_path(file_prefix):
     return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
 
 
+def _generate_file_path_from_func(func, func_args={}):
+    return _generate_file_path(func.__name__)
+
+
 class Keeper:
     """
     Load and save the given object
@@ -55,11 +59,15 @@ class Keeper:
             else:
                 logger.info("not found cache file...")
         logger.info("generating with func")
+        file_path = self.generate_file_path(func, func_args, label)
+        return self.generae_from_furnction(file_path, func, func_args)
+
+    def generate_file_path(self, func, func_args, label):
         if label:
             file_path = _generate_file_path(label)
         else:
-            file_path = _generate_file_path(func.__name__)
-        return self.generae_from_furnction(file_path, func, func_args)
+            file_path = _generate_file_path_from_func(func, func_args)
+        return file_path
 
     def generae_from_furnction(self, file_path, func, func_args):
         if len(func_args) == 0:
