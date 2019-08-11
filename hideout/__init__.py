@@ -8,7 +8,7 @@ from hideout.area import Keeper
 from hideout.log import logger
 
 
-def resume(label: str, func: Callable, func_args: Dict={}, stage: str=None) -> object:
+def resume(func: Callable, func_args: Dict={}, stage: str=None, label: str=None) -> object:
     """
     Returns the object generated from given function and the arguments.
     When the cache file exist the the object is loaded from the cache and
@@ -35,7 +35,7 @@ def resume(label: str, func: Callable, func_args: Dict={}, stage: str=None) -> o
         exist, the object is loaded from the cache file without calling
         specified func.
     """
-    return Keeper(label, stage).resume(func, func_args)
+    return Keeper(stage=stage).resume(func=func, func_args=func_args, label=label)
 
 
 def remove_all(base_dir: str=env.HIDEOUT_BASEDIR):
