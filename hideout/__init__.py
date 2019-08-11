@@ -35,7 +35,7 @@ def resume(label: str, func: Callable, func_args: Dict={}, stage: str=None) -> o
         exist, the object is loaded from the cache file without calling
         specified func.
     """
-    return Keeper(label, stage).resume(func, func_args)
+    return Keeper(stage=stage).resume(func=func, func_args=func_args, label=label)
 
 
 def remove_all(base_dir: str=env.HIDEOUT_BASEDIR):
