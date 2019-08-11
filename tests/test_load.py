@@ -4,7 +4,7 @@ import unittest
 import hideout
 import hideout.area
 from hideout import env
-from hideout.area import _generate_file_path
+from hideout.area import _generate_file_path_from_label
 from hideout.utils import freeze
 
 
@@ -52,7 +52,7 @@ class TestLoadCache(unittest.TestCase):
 
     def test_resume_with_cache(self):
         org_object = {"foobar": "baz"}
-        file_path = _generate_file_path("want-to-load-object")
+        file_path = _generate_file_path_from_label("want-to-load-object")
         freeze(org_object, file_path)
         want_to_load_object = hideout.resume(
             label="want-to-load-object",
@@ -77,7 +77,7 @@ class TestLoadCache(unittest.TestCase):
     def test_resume_with_disabling_cache(self):
         env.HIDEOUT_ENABLE_CACHE = False  # disabling cache
         org_object = {"foobar": "baz"}
-        file_path = _generate_file_path("want-to-load-object")
+        file_path = _generate_file_path_from_label("want-to-load-object")
         freeze(org_object, file_path)
         want_to_load_object = hideout.resume(
             label="want-to-load-object",
@@ -87,7 +87,7 @@ class TestLoadCache(unittest.TestCase):
     def test_not_resume_disabling_stage(self):
         env.HIDEOUT_SKIP_STAGES = ["preliminary"]
         org_object = {"foobar": "baz"}
-        file_path = _generate_file_path("want-to-load-object")
+        file_path = _generate_file_path_from_label("want-to-load-object")
         freeze(org_object, file_path)
         want_to_load_object = hideout.resume(
             label="want-to-load-object",
@@ -99,7 +99,7 @@ class TestLoadCache(unittest.TestCase):
     def test_resume_not_disabling_stage(self):
         env.HIDEOUT_SKIP_STAGES = ["preliminary"]
         org_object = {"foobar": "baz"}
-        file_path = _generate_file_path("want-to-load-object")
+        file_path = _generate_file_path_from_label("want-to-load-object")
         freeze(org_object, file_path)
         want_to_load_object = hideout.resume(
             label="want-to-load-object",

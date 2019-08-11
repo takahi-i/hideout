@@ -14,7 +14,6 @@ def generate_large_object(times):
 
 def cmd():
     result = hideout.resume(
-        label="large_object",
         func=generate_large_object,
         func_args={"times": 10}
     )

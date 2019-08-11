@@ -8,7 +8,7 @@ from hideout.area import Keeper
 from hideout.log import logger
 
 
-def resume(label: str, func: Callable, func_args: Dict={}, stage: str=None) -> object:
+def resume(func: Callable, func_args: Dict={}, stage: str=None, label: str=None) -> object:
     """
     Returns the object generated from given function and the arguments.
     When the cache file exist the the object is loaded from the cache and

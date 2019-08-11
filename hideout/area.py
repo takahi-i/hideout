@@ -7,12 +7,15 @@ from hideout.utils import freeze
 from hideout.log import logger
 
 
-def _generate_file_path(file_prefix):
-    return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, file_prefix)
+def _generate_file_path_from_label(label):
+    return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, label)
 
 
 def _generate_file_path_from_func(func, func_args={}):
-    return _generate_file_path(func.__name__)
+    label = func.__name__
+    for arg_name in func_args:
+        label += "-{}-{}".format(arg_name, str(func_args[arg_name]))
+    return _generate_file_path_from_label(label)
 
 
 class Keeper:
@@ -49,9 +52,10 @@ class Keeper:
         -------
         object : object
         """
+        file_path = self.generate_file_path(func, func_args, label)
+        logger.info("cache file: {}".format(file_path))
         if env.HIDEOUT_ENABLE_CACHE and self.stage not in env.HIDEOUT_SKIP_STAGES:
             logger.error("trying loading cache")
-            file_path = _generate_file_path(label)
             if os.path.exists(file_path):
                 logger.info("found {}".format(file_path))
                 with open(file_path, mode='rb') as f:
@@ -59,12 +63,11 @@ class Keeper:
             else:
                 logger.info("not found cache file...")
         logger.info("generating with func")
-        file_path = self.generate_file_path(func, func_args, label)
         return self.generae_from_furnction(file_path, func, func_args)
 
     def generate_file_path(self, func, func_args, label):
-        if label:
-            file_path = _generate_file_path(label)
+        if label is not None:
+            file_path = _generate_file_path_from_label(label)
         else:
             file_path = _generate_file_path_from_func(func, func_args)
         return file_path
