@@ -1,11 +1,10 @@
-import os
 import tempfile
 import unittest
 
 import hideout
 import hideout.area
 from hideout import env
-from hideout.file import freeze, _generate_file_path_from_label, generate_path
+from hideout.file import freeze, _generate_file_path_from_label
 
 
 def generate():

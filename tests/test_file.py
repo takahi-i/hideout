@@ -17,15 +17,14 @@ class TestFile(unittest.TestCase):
 
     def test_generate_file_name_with_label(self):
         self.assertEquals("large_object.pickle",
-                        os.path.basename(generate_path(
+                          os.path.basename(generate_path(
                             func=generate,
                             func_args={"baz": [0, 1, 2, 3, 4, 5, 7, 6, 8, 9, 10]},
-                            label="large_object"
-                        )))
+                            label="large_object")))
 
     def test_generate_file_name_from_hash(self):
         self.assertEquals("generate-baz-6979983cbc.pickle",
-                        os.path.basename(generate_path(
+                          os.path.basename(generate_path(
                             func=generate,
                             func_args={"baz": [0, 1, 2, 3, 4, 5, 7, 6, 8, 9, 10]})))
 
@@ -35,4 +34,3 @@ class TestFile(unittest.TestCase):
                           os.path.basename(generate_path(
                               func=generator.generate,
                               func_args={"baz": [0, 1, 2, 3, 4, 5, 7, 6, 8, 9, 10]})))
-

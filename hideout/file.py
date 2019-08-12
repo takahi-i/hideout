@@ -37,8 +37,9 @@ def freeze(target_object: object, file_path: str, stage: str=None) -> None:
 
 def generate_path(func, func_args, label=None):
     """
-    Return file path from arguments. If label is specified, this function returns the file name with the specified label.
-    Otherwise this function returns the file path from specified function name and the function arguments.
+    Return file path from arguments. If label is specified, this function returns the
+    file name with the specified label. Otherwise this function returns the file path
+    from specified function name and the function arguments.
 
     Parameters
     ----------
