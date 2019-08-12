@@ -70,5 +70,6 @@ def _generate_file_path_from_func(func, func_args={}):
         arg_value = str(func_args[arg_name])
         if len(arg_value) > 10:
             arg_value = hashlib.md5(arg_value.encode("utf-8")).hexdigest()[0:10]
+            print("hashed_value: " + arg_value)
         label += "-{}-{}".format(arg_name, arg_value)
     return _generate_file_path_from_label(label)
