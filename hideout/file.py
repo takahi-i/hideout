@@ -1,8 +1,6 @@
 import hashlib
-import inspect
 import os
 import pickle
-import sys
 
 from hideout import env
 from hideout.log import logger
