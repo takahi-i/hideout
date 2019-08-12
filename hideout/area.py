@@ -3,7 +3,7 @@ import pickle
 from typing import Callable, Dict
 
 from hideout import env
-from hideout.file import freeze, generate_file_path
+from hideout.file import freeze, generate_path
 from hideout.log import logger
 
 
@@ -41,7 +41,7 @@ class Keeper:
         -------
         object : object
         """
-        file_path = generate_file_path(func, func_args, label)
+        file_path = generate_path(func, func_args, label)
         logger.info("cache file: {}".format(file_path))
         if env.HIDEOUT_ENABLE_CACHE and self.stage not in env.HIDEOUT_SKIP_STAGES:
             logger.error("trying loading cache")

@@ -35,6 +35,14 @@ def freeze(target_object: object, file_path: str, stage: str=None) -> None:
         return pickle.dump(target_object, f)
 
 
+def generate_path(func, func_args, label=None):
+    if label is not None:
+        file_path = _generate_file_path_from_label(label)
+    else:
+        file_path = _generate_file_path_from_func(func, func_args)
+    return file_path
+
+
 def _generate_file_path_from_label(label):
     return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, label)
 
@@ -47,11 +55,3 @@ def _generate_file_path_from_func(func, func_args={}):
             arg_value = hashlib.md5(arg_value.encode("utf-8")).hexdigest()[0:10]
         label += "-{}-{}".format(arg_name, arg_value)
     return _generate_file_path_from_label(label)
-
-
-def generate_file_path(func, func_args, label=None):
-    if label is not None:
-        file_path = _generate_file_path_from_label(label)
-    else:
-        file_path = _generate_file_path_from_func(func, func_args)
-    return file_path
