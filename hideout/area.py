@@ -26,7 +26,8 @@ class Keeper:
     def resume_or_generate(self, func: Callable, func_args: Dict, label: str = None) -> object:
         """
         Returns the object generated from func with func_args parameters. When exist the cache file
-        containing target object, resume method does not given func and load the object from cache file.
+        containing target object, resume method does not given func and load the object from cache
+        file.
 
         Parameters
         ----------
