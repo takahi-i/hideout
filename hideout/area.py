@@ -1,33 +1,10 @@
 import os
 import pickle
-import hashlib
 from typing import Callable, Dict
 
 from hideout import env
-from hideout.utils import freeze
+from hideout.file import freeze, generate_path
 from hideout.log import logger
-
-
-def _generate_file_path_from_label(label):
-    return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, label)
-
-
-def _generate_file_path_from_func(func, func_args={}):
-    label = func.__name__
-    for arg_name in func_args:
-        arg_value = str(func_args[arg_name])
-        if len(arg_value) > 10:
-            arg_value = hashlib.md5(arg_value.encode("utf-8")).hexdigest()[0:10]
-        label += "-{}-{}".format(arg_name, arg_value)
-    return _generate_file_path_from_label(label)
-
-
-def generate_file_path(func, func_args, label=None):
-    if label is not None:
-        file_path = _generate_file_path_from_label(label)
-    else:
-        file_path = _generate_file_path_from_func(func, func_args)
-    return file_path
 
 
 class Keeper:
@@ -64,7 +41,7 @@ class Keeper:
         -------
         object : object
         """
-        file_path = generate_file_path(func, func_args, label)
+        file_path = generate_path(func, func_args, label)
         logger.info("cache file: {}".format(file_path))
         if env.HIDEOUT_ENABLE_CACHE and self.stage not in env.HIDEOUT_SKIP_STAGES:
             logger.error("trying loading cache")
@@ -75,9 +52,9 @@ class Keeper:
             else:
                 logger.info("not found cache file...")
         logger.info("generating with func")
-        return self.generae_from_furnction(file_path, func, func_args)
+        return self._generate_from_function(file_path, func, func_args)
 
-    def generae_from_furnction(self, file_path, func, func_args):
+    def _generate_from_function(self, file_path, func, func_args):
         if len(func_args) == 0:
             result = func()
         else:
