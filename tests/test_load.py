@@ -107,9 +107,3 @@ class TestLoadCache(unittest.TestCase):
             stage="body"
         )
         self.assertEqual({"foobar": "baz"}, want_to_load_object)
-
-    def test_generate_file_name_from_hash(self):
-        self.assertTrue("generate2-baz-6979983cbc.pickle",
-                        os.path.basename(generate_file_path(
-                            func=generate2,
-                            func_args={"baz": [0, 1, 2, 3, 4, 5, 7, 6, 8, 9, 10]})))
