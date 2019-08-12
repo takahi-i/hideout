@@ -6,7 +6,7 @@ import hideout
 import hideout.area
 from hideout import env
 from hideout.area import _generate_file_path_from_label, generate_file_path
-from hideout.utils import freeze
+from hideout.file import freeze
 
 
 def generate():

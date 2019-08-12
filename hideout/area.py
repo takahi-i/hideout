@@ -4,7 +4,7 @@ import hashlib
 from typing import Callable, Dict
 
 from hideout import env
-from hideout.utils import freeze
+from hideout.file import freeze
 from hideout.log import logger
 
 
