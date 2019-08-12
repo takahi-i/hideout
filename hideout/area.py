@@ -1,33 +1,10 @@
 import os
 import pickle
-import hashlib
 from typing import Callable, Dict
 
 from hideout import env
-from hideout.file import freeze
+from hideout.file import freeze, generate_file_path
 from hideout.log import logger
-
-
-def _generate_file_path_from_label(label):
-    return "{}/{}.pickle".format(env.HIDEOUT_BASEDIR, label)
-
-
-def _generate_file_path_from_func(func, func_args={}):
-    label = func.__name__
-    for arg_name in func_args:
-        arg_value = str(func_args[arg_name])
-        if len(arg_value) > 10:
-            arg_value = hashlib.md5(arg_value.encode("utf-8")).hexdigest()[0:10]
-        label += "-{}-{}".format(arg_name, arg_value)
-    return _generate_file_path_from_label(label)
-
-
-def generate_file_path(func, func_args, label=None):
-    if label is not None:
-        file_path = _generate_file_path_from_label(label)
-    else:
-        file_path = _generate_file_path_from_func(func, func_args)
-    return file_path
 
 
 class Keeper:
