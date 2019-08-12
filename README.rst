@@ -33,7 +33,7 @@ loads it otherwise call specified function to generate expected object.
 
 ::
 
-        large_object = hideout.resume(
+        large_object = hideout.resume_or_generate(
             label="large_object",
             func=generate_large_object,
             func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"}
@@ -41,6 +41,8 @@ loads it otherwise call specified function to generate expected object.
 
 
 `hideout.resume` have `func_args` option which contains the parameters of specified function to generate the expected object.
+We can specify the prefix of cache file with `label` option. When we do not specify the `label` option, `resume_or_generate` method automatically
+name the cache file from function name and the arguments.
 
 Enable / Disable Cache
 ~~~~~~~~~~~~~~~~~~~~~~~
