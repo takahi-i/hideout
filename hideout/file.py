@@ -51,7 +51,7 @@ def generate_path(func, func_args, label=None):
 
     Returns
     -------
-    file path
+    str : file path
     """
     if label:
         file_path = _generate_file_path_from_label(label)

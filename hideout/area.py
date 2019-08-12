@@ -52,9 +52,9 @@ class Keeper:
             else:
                 logger.info("not found cache file...")
         logger.info("generating with func")
-        return self.generae_from_furnction(file_path, func, func_args)
+        return self._generate_from_function(file_path, func, func_args)
 
-    def generae_from_furnction(self, file_path, func, func_args):
+    def _generate_from_function(self, file_path, func, func_args):
         if len(func_args) == 0:
             result = func()
         else:
