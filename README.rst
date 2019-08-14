@@ -40,15 +40,15 @@ loads it otherwise call specified function to generate expected object.
         )
 
 
-`hideout.resume` have `func_args` option which contains the parameters of specified function to generate the expected object.
-We can specify the prefix of cache file with `label` option. When we do not specify the `label` option, `resume_or_generate` method automatically
+:code:`hideout.resume` have :code:`func_args` option which contains the parameters of specified function to generate the expected object.
+We can specify the prefix of cache file with `label` option. When we do not specify the :code:`label` option, :code:`resume_or_generate` method automatically
 name the cache file from function name and the arguments.
 
 Enable / Disable Cache
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 In default, Hideout is not activated and therefore does not save and load cache files. To enable cache we set the provided environment variable
-`HIDOUT_ENABLE_CACHE` to `True`.
+:code:`HIDOUT_ENABLE_CACHE` to :code:`True`.
 
 ::
 
@@ -67,7 +67,7 @@ Directory to Store Cache Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In default, Hideout saves the cache files in `caches` under the top project directory. If we specify the directory, we specify it with environment variable
-`HIDEOUT_BASE_DIR`.
+:code:`HIDEOUT_BASE_DIR`.
 
 For Developers
 ---------------
