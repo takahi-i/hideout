@@ -65,7 +65,7 @@ class Keeper:
 
     def _postprocess(self, result, file_path) -> None:
         if result is not None:
-            logger.info("found pickled object ...")
+            logger.info("freezing object to {} ...".format(file_path))
             freeze(result, file_path, self.stage)
         else:
             raise RuntimeError("Any object is loaded ...")
