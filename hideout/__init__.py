@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 import glob
+import hideout.log
+
 from logging import Logger
 from typing import Dict, Callable
 
@@ -75,4 +77,4 @@ def set_logger(logger: Logger):
     -------
     None
     """
-    log.logger = logger
+    hideout.log.logger = logger
