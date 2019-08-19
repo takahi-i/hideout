@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 import glob
+import hideout.log
+
+from logging import Logger
 from typing import Dict, Callable
 
 from hideout import env
@@ -9,7 +12,7 @@ from hideout.log import logger
 
 
 def resume_or_generate(
-        func: Callable, func_args: Dict={}, stage: str=None, label: str=None) -> object:
+        func: Callable, func_args: Dict = {}, stage: str = None, label: str = None) -> object:
     """
     Returns the object generated from given function and the arguments.
     When the cache file exist the the object is loaded from the cache and
@@ -42,7 +45,7 @@ def resume_or_generate(
         label=label)
 
 
-def remove_all(base_dir: str=env.HIDEOUT_BASEDIR):
+def remove_all(base_dir: str = env.HIDEOUT_BASEDIR):
     """
     Remove all cache files.
 
@@ -59,3 +62,19 @@ def remove_all(base_dir: str=env.HIDEOUT_BASEDIR):
     logger.info("removing all pickles in {}".format(base_dir))
     for f in files:
         os.remove(f)
+
+
+def set_logger(logger: Logger):
+    """
+    Set logger object.
+
+    Parameters
+    ----------
+    logger : Logger
+        Logger object
+
+    Returns
+    -------
+    None
+    """
+    hideout.log.logger = logger

@@ -25,7 +25,7 @@ Usage
 ------
 
 
-Basic Usage 
+Basic Usage
 ~~~~~~~~~~~~
 
 Hideout save and load object with `hideout.resume`. If the cache file for the object exist, hideout
@@ -68,6 +68,13 @@ Directory to Store Cache Files
 
 In default, Hideout saves the cache files in `caches` under the top project directory. If we specify the directory, we specify it with environment variable
 :code:`HIDEOUT_BASE_DIR`.
+
+
+Inject logger
+~~~~~~~~~~~~~~
+
+When you want to apply the logger which you use throughout an application, you can inject the logger with
+:code:`hideout.set_logger()` function.
 
 For Developers
 ---------------
