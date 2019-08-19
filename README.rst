@@ -2,6 +2,10 @@
     :alt: Build status
     :target: https://travis-ci.org/takahi-i/hideout
 
+.. image:: https://img.shields.io/badge/python-3.5-blue.svg
+    :alt: Supported Python version
+    :target: https://www.python.org/downloads/release/python-350/
+
 
 =====================================================
 hideout 
