@@ -12,9 +12,6 @@ except ImportError: # for pip <= 9.0.3
 
 LONG_DESCRIPTION = """tiny cache file manager for data analysis"""
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
 requirements = [ str(requirement.req) for requirement in parse_requirements('requirements.txt', session="production") ]
 
 setup_requirements = [
