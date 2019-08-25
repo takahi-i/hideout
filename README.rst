@@ -70,7 +70,7 @@ Disable Cache for Specified Stages
 Directory to Store Cache Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In default, Hideout saves the cache files in `caches` under the top project directory. If we specify the directory, we specify it with environment variable
+In default, Hideout saves the cache files in :code:`caches` under the top project directory. If we specify the directory, we specify it with environment variable
 :code:`HIDEOUT_BASE_DIR`.
 
 
@@ -83,6 +83,7 @@ When you want to apply the logger which you use throughout an application, you c
 For Developers
 ---------------
 
+We can install the hideout package and upload it to pypi repository.
 
 Install to local environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
