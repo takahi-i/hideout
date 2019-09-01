@@ -25,12 +25,8 @@ We can install hideout with pip. Run the following command.
     $ pip install hideout
 
 
-Usage
-------
-
-
 Basic Usage
-~~~~~~~~~~~~
+------------
 
 Hideout save and load object with `hideout.resume`. If the cache file for the object exist, hideout
 loads it otherwise call specified function to generate expected object.
@@ -48,6 +44,9 @@ loads it otherwise call specified function to generate expected object.
 We can specify the prefix of cache file with `label` option. When we do not specify the :code:`label` option, :code:`resume_or_generate` method automatically
 name the cache file from function name and the arguments.
 
+Usage
+---------
+
 Enable / Disable Cache
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -62,13 +61,28 @@ In default, Hideout is not activated and therefore does not save and load cache 
 Disable Cache for Specified Stages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Hideout provide stage for skipping caches for specified points.
+Users can add the stage names to the object generation by :code:`hideout.resume_or_generate`
+with :code:`stage` parameter.
+
+::
+
+        large_object = hideout.resume_or_generate(
+            label="large_object",
+            func=generate_large_object,
+            func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"}
+        )
+
+
+Specifing stage names with :code:`HIDEOUT_SKIP_STAGES`, hideout skip the caching.
+For example, the following command skip caching named preliminaries and integrate.
 
 ::
 
     $ HIDEOUT_SKIP_STAGES=preliminaries,integrate your_data_engineering_program.py
 
-Directory to Store Cache Files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Specify directory to Store Cache Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In default, Hideout saves the cache files in :code:`caches` under the top project directory. If we specify the directory, we specify it with environment variable
 :code:`HIDEOUT_BASE_DIR`.
