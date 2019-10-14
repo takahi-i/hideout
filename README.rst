@@ -112,3 +112,14 @@ Upload to pypi
 ::
 
     $ python setup.py sdist upload
+
+
+License
+-------
+
+MIT
+
+Contribution
+-------------
+
+See `CONTRIBUTING.md <CONTRIBUTING.md>`_.
