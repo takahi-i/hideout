@@ -85,7 +85,7 @@ Specify directory to Store Cache Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In default, Hideout saves the cache files in :code:`caches` under the top project directory. If we specify the directory, we specify it with environment variable
-:code:`HIDEOUT_BASE_DIR`.
+:code:`HIDEOUT_CACHE_DIR`.
 
 
 Inject logger
@@ -123,3 +123,4 @@ Contribution
 -------------
 
 See `CONTRIBUTING.md <CONTRIBUTING.md>`_.
+
