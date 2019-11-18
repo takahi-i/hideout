@@ -23,8 +23,6 @@ def freeze(target_object: object, file_path: str, stage: str=None) -> None:
     Returns
     -------
     """
-    logger.info("HIDEOUT_ENABLE_CACHE is set to {}".format(env.HIDEOUT_ENABLE_CACHE))
-    logger.info("HIDEOUT_SKIP_STAGES is set to {}".format(env.HIDEOUT_SKIP_STAGES))
     if env.HIDEOUT_ENABLE_CACHE is False or stage in env.HIDEOUT_SKIP_STAGES:
         logger.info("skip saving to cache file ...")
         return

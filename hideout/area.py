@@ -22,6 +22,8 @@ class Keeper:
             Stage of program.
         """
         self.stage = stage
+        logger.info("HIDEOUT_ENABLE_CACHE is set to {}...".format(env.HIDEOUT_ENABLE_CACHE))
+        logger.info("HIDEOUT_SKIP_STAGES is set to {}...".format(env.HIDEOUT_SKIP_STAGES))
 
     def resume_or_generate(self, func: Callable, func_args: Dict, label: str = None) -> object:
         """
@@ -43,11 +45,10 @@ class Keeper:
         object : object
         """
         file_path = generate_path(func, func_args, label)
-        logger.info("cache file: {}".format(file_path))
         if env.HIDEOUT_ENABLE_CACHE and self.stage not in env.HIDEOUT_SKIP_STAGES:
-            logger.error("trying loading cache")
+            logger.info("specified cache file: {}".format(file_path))
             if os.path.exists(file_path):
-                logger.info("found {}".format(file_path))
+                logger.info("found {} ...".format(file_path))
                 with open(file_path, mode='rb') as f:
                     return pickle.load(f)
             else:
