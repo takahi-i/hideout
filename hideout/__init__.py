@@ -45,7 +45,7 @@ def resume_or_generate(
         label=label)
 
 
-def remove_all(base_dir: str = env.HIDEOUT_BASEDIR):
+def remove_all(base_dir: str = env.HIDEOUT_CACHE_DIR):
     """
     Remove all cache files.
 

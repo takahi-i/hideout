@@ -29,8 +29,8 @@ def freeze(target_object: object, file_path: str, stage: str=None) -> None:
         logger.info("skip saving to cache file ...")
         return
 
-    if not os.path.exists(env.HIDEOUT_BASEDIR):
-        os.makedirs(env.HIDEOUT_BASEDIR, exist_ok=True)
+    if not os.path.exists(env.HIDEOUT_CACHE_DIR):
+        os.makedirs(env.HIDEOUT_CACHE_DIR, exist_ok=True)
 
     logger.info("saving {}".format(file_path))
     with open(file_path, mode='wb') as f:
@@ -64,7 +64,7 @@ def generate_path(func, func_args, label=None):
 
 
 def _generate_file_path_from_label(label):
-    return os.path.join(env.HIDEOUT_BASEDIR, "{}.pickle".format(label))
+    return os.path.join(env.HIDEOUT_CACHE_DIR, "{}.pickle".format(label))
 
 
 def _generate_file_path_from_func(func, func_args={}):

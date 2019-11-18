@@ -28,7 +28,7 @@ class Generator2:
 class TestLoadCache(unittest.TestCase):
 
     def setUp(self):
-        env.HIDEOUT_BASEDIR = tempfile.mkdtemp()
+        env.HIDEOUT_CACHE_DIR = tempfile.mkdtemp()
         env.HIDEOUT_ENABLE_CACHE = True
 
     def test_resume_without_cache(self):
@@ -37,7 +37,7 @@ class TestLoadCache(unittest.TestCase):
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
 
     def test_resume_and_save_to_not_exist_dir(self):
-        env.HIDEOUT_BASEDIR = tempfile.mkdtemp() + "/foobar"
+        env.HIDEOUT_CACHE_DIR = tempfile.mkdtemp() + "/foobar"
         want_to_load_object = hideout.resume_or_generate(
             label="want-to-load-object", func=generate)
         self.assertEqual({"foobar": "bar"}, want_to_load_object)
