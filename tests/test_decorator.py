@@ -2,24 +2,24 @@ import tempfile
 import unittest
 
 import hideout
-from hideout import resume
+from hideout import resumable
 import hideout.area
 from hideout import env
 from hideout.file import freeze, _generate_file_path_from_label
 
-@resume()
+@resumable()
 def generate():
     return {"foobar": "bar"}
 
 
 class Generator:
-    @resume(label="generate")
+    @resumable(label="generate")
     def generate(self):
         return {"foobar": "bar"}
 
 
 class Generator2:
-    @resume()
+    @resumable()
     def generate(self, baz):
         return {"foobar": baz}
 

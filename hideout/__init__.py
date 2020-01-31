@@ -45,7 +45,7 @@ def resume_or_generate(
         label=label)
 
 
-def resume(stage: str = None, label: str = None):
+def resumable(stage: str = None, label: str = None):
     """
     A decorator function which returns the object generated from given function and the arguments.
     When the cache file exist the the object is loaded from the cache and
