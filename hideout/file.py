@@ -6,7 +6,7 @@ from hideout import env
 from hideout.log import logger
 
 
-def freeze(target_object: object, file_path: str, stage: str=None) -> None:
+def freeze(target_object: object, file_path: str, stage: str = None) -> None:
     """
     Save the given object int the specified file path. When HIDEOUT_ENABLE_CACHE
     is set to False or HIDEOUT_SKIP_STAGE contains given stage name, the object is
@@ -61,8 +61,57 @@ def generate_path(func, func_args, label=None):
     return file_path
 
 
+def generate_path_for_decorator(func, args, kwargs, label=None):
+    """
+    Return file path from arguments. If label is specified, this function returns the
+    file name with the specified label. Otherwise this function returns the file path
+    from specified function name and the function arguments.
+
+    Parameters
+    ----------
+    func
+        function to generate object
+    args
+        arguments for the specified function
+    kwargs
+        arguments for the specified function
+    label
+        file prefix
+
+    Returns
+    -------
+    str : file path
+    """
+    if label:
+        file_path = _generate_file_path_from_label(label)
+    else:
+        file_path = _generate_file_path_from_func_for_decorator(func, args, kwargs)
+    return file_path
+
+
 def _generate_file_path_from_label(label):
     return os.path.join(env.HIDEOUT_CACHE_DIR, "{}.pickle".format(label))
+
+
+def _generate_file_path_from_func_for_decorator(func, args, kwargs):
+    class_name = _get_class_that_defined_method(func)
+    label = "{}".format(class_name)
+
+    for arg in args:
+        arg_name = str(arg)
+        if len(arg_name) > 10:
+            arg_name = hashlib.md5(arg_name.encode("utf-8")).hexdigest()[0:10]
+        label += "-{}".format(arg_name)
+
+    for arg_name in kwargs:
+        print(kwargs)
+        arg_value = str(kwargs[arg_name])
+        print("arg_name: {} \t arg_value: {}".format(arg_name, arg_value))
+        if len(arg_value) > 10:
+            arg_value = hashlib.md5(arg_value.encode("utf-8")).hexdigest()[0:10]
+        label += "-{}-{}".format(arg_name, arg_value)
+
+    return _generate_file_path_from_label(label)
 
 
 def _generate_file_path_from_func(func, func_args={}):
