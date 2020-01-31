@@ -70,3 +70,6 @@ target/
 
 # mypy
 .mypy_cache/
+
+# other
+caches/
