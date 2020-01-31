@@ -97,11 +97,16 @@ def _generate_file_path_from_func_for_decorator(func, args, kwargs):
     class_name = _get_class_that_defined_method(func)
     label = "{}".format(class_name)
 
-    for arg_name in args:
+    for arg in args:
+        arg_name = str(arg)
+        if len(arg_name) > 10:
+            arg_name = hashlib.md5(arg_name.encode("utf-8")).hexdigest()[0:10]
         label += "-{}".format(arg_name)
 
     for arg_name in kwargs:
+        print(kwargs)
         arg_value = str(kwargs[arg_name])
+        print("arg_name: {} \t arg_value: {}".format(arg_name, arg_value))
         if len(arg_value) > 10:
             arg_value = hashlib.md5(arg_value.encode("utf-8")).hexdigest()[0:10]
         label += "-{}-{}".format(arg_name, arg_value)
