@@ -50,7 +50,7 @@ we just add the `resumable` decoration to the instance method.
 ::
 
     class Generator2:
-        @resume()
+        @resumable()
         def generate(self, baz):
             return {"foobar": baz}
 
@@ -98,9 +98,18 @@ with :code:`stage` parameter.
         large_object = hideout.resume_or_generate(
             label="large_object",
             func=generate_large_object,
+            stage="preliminaries",
             func_args={"source": "s3-northeast-8.amazonaws.com/large-dic.txt"}
         )
 
+If you use decoration style, add `stage` parameter to the decorator.
+
+::
+
+     @resumable(stage="preliminaries")
+     def generate():
+         sleep(10)
+         return {"foobar": "bar"}
 
 Specifing stage names with :code:`HIDEOUT_SKIP_STAGES`, hideout skip the caching.
 For example, the following command skip caching named preliminaries and integrate.
