@@ -1,11 +1,10 @@
 import tempfile
 import unittest
 
-import hideout
 from hideout import resumable
-import hideout.area
 from hideout import env
 from hideout.file import freeze, _generate_file_path_from_label
+
 
 @resumable()
 def generate():

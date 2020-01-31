@@ -56,8 +56,11 @@ class Keeper:
         logger.info("generating with func")
         return self._generate_from_function(file_path, func, func_args)
 
-
-    def resume_or_generate_for_decorator(self, func: Callable, args: list, kwargs: dict, label: str = None) -> object:
+    def resume_or_generate_for_decorator(self,
+                                         func: Callable,
+                                         args: list,
+                                         kwargs: dict,
+                                         label: str = None) -> object:
         """
         Returns the object generated from func with func_args parameters. When exist the cache file
         containing target object, resume method does not given func and load the object from cache
@@ -90,7 +93,6 @@ class Keeper:
         logger.info("generating with func")
         return self._generate_from_function_for_decorator(file_path, func, args, kwargs)
 
-
     def _generate_from_function_for_decorator(self, file_path, func, args, kwargs):
         if len(args) == 0 and len(kwargs):
             result = func()
@@ -98,7 +100,6 @@ class Keeper:
             result = func(*args, **kwargs)
         self._postprocess(result, file_path)
         return result
-
 
     def _generate_from_function(self, file_path, func, func_args):
         if len(func_args) == 0:

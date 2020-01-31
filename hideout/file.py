@@ -6,7 +6,7 @@ from hideout import env
 from hideout.log import logger
 
 
-def freeze(target_object: object, file_path: str, stage: str=None) -> None:
+def freeze(target_object: object, file_path: str, stage: str = None) -> None:
     """
     Save the given object int the specified file path. When HIDEOUT_ENABLE_CACHE
     is set to False or HIDEOUT_SKIP_STAGE contains given stage name, the object is
