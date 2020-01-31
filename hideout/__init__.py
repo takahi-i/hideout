@@ -45,6 +45,35 @@ def resume_or_generate(
         label=label)
 
 
+def resume(stage: str = None, label: str = None):
+    """
+    A decorator function which returns the object generated from given function and the arguments.
+    When the cache file exist the the object is loaded from the cache and
+    given function is not called.
+
+    Parameters
+    ----------
+    stage : str
+        stage of the program. This value is used when you want to specify
+        the stage to skip caching.
+    label : str
+        Prefix of the name of cache file for the loaded object.
+
+    Returns
+    -------
+    Function: which wrap the argument function for caching.
+    """
+    def _memorize(function):
+        def _memorized(*args, **kwargs):
+            return Keeper(stage=stage).resume_or_generate_for_decorator(
+                func=function,
+                args=args,
+                kwargs=kwargs,
+                label=label)
+        return _memorized
+    return _memorize
+
+
 def remove_all(base_dir: str = env.HIDEOUT_CACHE_DIR):
     """
     Remove all cache files.
