@@ -32,7 +32,9 @@ Hideout support two types of caching. One is decoration style,
 the other is registering function to a hideout function adding
 the target function as the argument.
 
-## Decoration
+Decoration
+~~~~~~~~~~~
+
 
 We just add `resumable` to the target function.
 
@@ -54,7 +56,8 @@ we just add the `resumable` decoration to the instance method.
         def generate(self, baz):
             return {"foobar": baz}
 
-## Function argument
+Function argument
+~~~~~~~~~~~~~~~~~~
 
 Hideout save and load object with `hideout.resume`. If the cache file for the object exist, hideout
 loads it otherwise call specified function to generate expected object.
