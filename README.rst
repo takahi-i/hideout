@@ -11,8 +11,8 @@
 Hideout 
 =====================================================
 
-Programs which process large amount data such as machine learning or data mining takes sorts of input data. After input data are loaded, program creates intermediate objects using input data.
-Getting or converting data takes large amount of the time. This problem prevents programmers to refactor data processing programs.
+Data processing projects such as machine learning or data mining take sorts of large amount of input data. After input data are loaded, such programs create or convert intermediate objects using input data.
+Getting or converting data also takes long time. This aspect of data processing projects prevents software engineers to refactor codes or keep them clean.
 
 
 Install
