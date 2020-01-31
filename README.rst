@@ -11,7 +11,7 @@
 Hideout 
 =====================================================
 
-Data processing programs such as machine learning takes sorts of input data. After input data are loaded, program creates intermediate objects using input data.
+Programs which process large amount data such as machine learning or data mining takes sorts of input data. After input data are loaded, program creates intermediate objects using input data.
 Getting or converting data takes large amount of the time. This problem prevents programmers to refactor data processing programs.
 
 
