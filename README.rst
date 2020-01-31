@@ -28,6 +28,34 @@ We can install hideout with pip. Run the following command.
 Basic Usage
 ------------
 
+Hideout support two types of caching. One is decoration style,
+the other is registering function to a hideout function adding
+the target function as the argument.
+
+## Decoration
+
+We just add `resumable` to the target function.
+
+::
+
+     @resumable()
+     def generate():
+         sleep(10)
+         return {"foobar": "bar"}
+
+
+If you want to cache the result of a instance method of a object,
+we just add the `resumable` decoration to the instance method.
+
+::
+
+    class Generator2:
+        @resume()
+        def generate(self, baz):
+            return {"foobar": baz}
+
+## Function argument
+
 Hideout save and load object with `hideout.resume`. If the cache file for the object exist, hideout
 loads it otherwise call specified function to generate expected object.
 
